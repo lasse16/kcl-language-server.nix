@@ -19,13 +19,6 @@ rustPlatform.buildRustPackage rec {
   sourceRoot = "${src.name}/kclvm";
   useFetchCargoVendor = true;
   cargoHash = "sha256-xRxfhDPgCOvf95q6AoNNtxxBPsqFbDQzWQU3cKalcEg=";
-  # cargoLock = {
-  #   lockFile = ./Cargo.lock;
-  #   outputHashes = {
-  #     "inkwell-0.5.0" = "sha256-SqitoKuiy5pjZfnuoxmKPastWsBVdSvjX2FKCKudYY8=";
-  #     "protoc-bin-vendored-3.2.0" = "sha256-cYLAjjuYWat+8RS3vtNVS/NAJYw2NGeMADzGBL1L2Ww=";
-  #   };
-  # };
 
   buildPhaseCargoFlags = [
     "--profile"

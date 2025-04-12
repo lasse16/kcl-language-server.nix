@@ -39,7 +39,7 @@ rustPlatform.buildRustPackage rec {
     homepage = "https://github.com/kcl-lang/kcl";
     license = licenses.asl20;
     platforms = platforms.linux;
-    maintainers = with maintainers; [];
+    maintainers = with maintainers; [lasse16];
     mainProgram = "kcl-language-server";
   };
 }

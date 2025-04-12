@@ -1,24 +1,25 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    kclpkgs.url = "github:appthrust/kcl-nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, kclpkgs }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        kcl = kclpkgs.default.${system};
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          buildInputs = [
-            kcl.cli
-            kcl.language-server
-            kcl.kubectl-kcl
-          ];
-        };
-      }
-    );
+  outputs = {
+    nixpkgs,
+    self,
+  }: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [self.overlays.kcl-language-server];
+    };
+  in {
+    overlays.kcl-language-server = final: prev: {
+      kcl-language-server = prev.callPackage ./kcl.nix {};
+    };
+    devShells.${system} = {
+      default = pkgs.mkShellNoCC {
+        packages = [pkgs.kcl-language-server];
+      };
+    };
+  };
 }

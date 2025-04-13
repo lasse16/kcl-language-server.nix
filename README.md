@@ -4,6 +4,40 @@ Here is a flake and nixpkgs overlay that provides the `kcl-language-server` bina
 
 Use the devShell from this flake or the overlay directly.
 
+## Usage 
+This is a minimal flake template to use this overlay.
+
+```nix
+
+{
+  description = "Include the kcl-language-server";
+
+  inputs.kcl-lsp.url = "github:lasse16/kcl-language-server.nix";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+  outputs = all @ {
+    self,
+    nixpkgs,
+    kcl-lsp,
+    ...
+  }: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [
+        kcl-lsp.overlays.kcl-language-server
+      ];
+    };
+  in {
+    devShells.x86_64-linux = {
+      default = pkgs.mkShellNoCC {
+        packages = with pkgs; [kcl-language-server];
+      };
+    };
+  };
+}
+
+```
 ## Background
 
 The KCL instructions ask you to install kcl and then the languager server separately.

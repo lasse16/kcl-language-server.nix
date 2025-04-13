@@ -34,3 +34,9 @@ So, for now I keep my custom package and you are free to use it too.
 > This is a separate git repository at [kcl-lang/cli](https://github.com/kcl-lang/cli).
 > It is a Go package that contains the `kcl` cli tool, and not the `kclvm` tool/tooling.
 > These are entirely independant, at least for the language server setup.
+
+## References
+- <https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/rust.section.md>
+- <https://github.com/NixOS/nixpkgs/blob/nixos-24.11/pkgs/by-name/kc/kclvm/package.nix>
+- <https://discourse.nixos.org/t/help-using-a-nixpkgs-overlay-in-a-flake/46075/6>
+- <https://zimbatm.com/notes/1000-instances-of-nixpkgs>
